@@ -275,8 +275,8 @@ img {
 /* =============== HERO SECTION =============== */
 .hero {
     position: relative;
-    min-height: 100vh;
-    padding: 120px 0 50px; /* Increased top padding */
+    min-height: 85vh; /* Reduced height on desktop */
+    padding: 120px 0 40px;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     overflow: hidden;
 }
@@ -354,6 +354,15 @@ img {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+/* Licensed certificate icon styling */
+.stat-number i.fa-certificate {
+    background: var(--gradient-orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
 }
 
 .stat-text {
@@ -1041,8 +1050,8 @@ img {
     /* Hero fixes to prevent overlap */
     .hero {
         margin-top: 70px; /* Account for fixed header */
-        padding: 40px 0 50px;
-        min-height: calc(100vh - 70px);
+        padding: 40px 0 40px;
+        min-height: calc(90vh - 70px); /* Slightly reduced for mobile too */
     }
     
     /* Mobile hamburger menu - FORCE SHOW */
@@ -1222,6 +1231,11 @@ img {
         font-size: 1.8rem;
         display: block;
         font-weight: 700;
+    }
+    
+    /* Mobile certificate icon sizing */
+    .stat-number i.fa-certificate {
+        font-size: 1.8rem;
     }
     
     .stat-text {
@@ -1687,6 +1701,11 @@ img {
     }
     
     .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    /* Very small screen certificate icon sizing */
+    .stat-number i.fa-certificate {
         font-size: 1.5rem;
     }
 
