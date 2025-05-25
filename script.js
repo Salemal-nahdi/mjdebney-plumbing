@@ -200,10 +200,10 @@ document.querySelectorAll('.gallery-item').forEach((el, index) => {
     observer.observe(el);
 });
 
-// =============== FORM SUBMISSION ===============
+// =============== NETLIFY FORM SUBMISSION ===============
 const contactForm = document.getElementById('contact-form');
 
-contactForm?.addEventListener('submit', (e) => {
+contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     // Add loading state
@@ -212,14 +212,38 @@ contactForm?.addEventListener('submit', (e) => {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     
-    // Simulate form submission (replace with actual form handler)
-    setTimeout(() => {
-        // Reset form
-        contactForm.reset();
+    try {
+        // Prepare form data for Netlify
+        const formData = new FormData(contactForm);
         
-        // Show success message
-        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-        submitBtn.style.background = 'var(--gradient-orange)';
+        // Submit to Netlify
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+        });
+        
+        if (response.ok) {
+            // Success - reset form and show success message
+            contactForm.reset();
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            submitBtn.style.background = 'var(--gradient-orange)';
+            
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 3000);
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        console.error('Form submission error:', error);
+        
+        // Show error message
+        submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
+        submitBtn.style.background = '#dc3545';
         
         // Reset button after 3 seconds
         setTimeout(() => {
@@ -227,7 +251,7 @@ contactForm?.addEventListener('submit', (e) => {
             submitBtn.style.background = '';
             submitBtn.disabled = false;
         }, 3000);
-    }, 2000);
+    }
 });
 
 // =============== DYNAMIC YEAR IN FOOTER ===============

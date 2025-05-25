@@ -583,18 +583,37 @@
                     </div>
                     
                     <div class="contact-form">
-                        <form id="contact-form">
+                        <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                            <!-- Hidden field for bot detection -->
+                            <input type="hidden" name="form-name" value="contact" />
+                            <div style="display: none;">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </div>
+                            
                             <div class="form-group">
-                                <input type="text" class="form-input" placeholder="Your Name" required>
+                                <input type="text" name="name" class="form-input" placeholder="Your Name" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-input" placeholder="Your Email" required>
+                                <input type="email" name="email" class="form-input" placeholder="Your Email" required>
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-input" placeholder="Your Phone" required>
+                                <input type="tel" name="phone" class="form-input" placeholder="Your Phone" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-input form-textarea" placeholder="Your Message" rows="5" required></textarea>
+                                <select name="service" class="form-input" required>
+                                    <option value="">Select Service Needed</option>
+                                    <option value="General Plumbing">General Plumbing</option>
+                                    <option value="Gas Fitting">Gas Fitting</option>
+                                    <option value="Hot Water Systems">Hot Water Systems</option>
+                                    <option value="Bathroom Renovations">Bathroom Renovations</option>
+                                    <option value="Drainage Solutions">Drainage Solutions</option>
+                                    <option value="Emergency Service">Emergency Service</option>
+                                    <option value="Quote Request">Quote Request</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" class="form-input form-textarea" placeholder="Your Message" rows="5" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block">
                                 <i class="fas fa-paper-plane"></i>
