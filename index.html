@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.J. Debney Plumbing & Gas - Expert Plumbing and Gas Services</title>
+    <meta name="description" content="Professional plumbing and gas services by M.J. Debney. Quality workmanship, reliable service, and competitive prices.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Mobile Menu Script - IMMEDIATE AVAILABILITY -->
+    <script>
+        // Define mobile menu function immediately in head
+        function toggleMobileMenu() {
+            console.log('Mobile menu toggle clicked from HEAD script!');
+            
+            const menu = document.getElementById('nav-menu');
+            if (!menu) {
+                console.error('Menu element not found!');
+                return;
+            }
+            
+            const isOpen = menu.classList.contains('show');
+            console.log('Menu is currently:', isOpen ? 'OPEN' : 'CLOSED');
+            
+            if (isOpen) {
+                menu.classList.remove('show');
+                document.body.style.overflow = '';
+                console.log('Menu CLOSED');
+            } else {
+                menu.classList.add('show');
+                document.body.style.overflow = 'hidden';
+                console.log('Menu OPENED');
+            }
+        }
+        
+        // Make function globally available
+        window.toggleMobileMenu = toggleMobileMenu;
+        
+        // Function to close menu (for nav links)
+        window.closeMobileMenu = function() {
+            const menu = document.getElementById('nav-menu');
+            if (menu && menu.classList.contains('show')) {
+                console.log('Closing mobile menu from nav link');
+                menu.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        };
+        
+        // Setup nav link handlers when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Setting up nav link close handlers in HEAD script');
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    console.log('Nav link clicked:', link.textContent);
+                    setTimeout(window.closeMobileMenu, 50);
+                });
+            });
+        });
+        
+        console.log('Mobile menu function defined in HEAD!');
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="symbol-only.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#home" class="nav-logo">
+                <img src="symbol-only.png" alt="M.J. Debney Logo" class="logo-symbol">
+                <span class="logo-text">M.J. DEBNEY</span>
+            </a>
+            
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#work" class="nav-link">Our Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#testimonials" class="nav-link">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-toggle" id="nav-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero section" id="home">
+            <div class="hero-container container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-title-main">Expert Plumbing & Gas</span>
+                        <span class="hero-title-sub">Services You Can Trust</span>
+                    </h1>
+                    <p class="hero-description">
+                        Professional, reliable, and affordable plumbing and gas solutions for residential and commercial properties.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-phone-alt"></i>
+                            Get a Quote
+                        </a>
+                        <a href="#services" class="btn btn-secondary">
+                            <i class="fas fa-tools"></i>
+                            Our Services
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-text">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-text">Happy Customers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-text">Emergency Service</span>
+                        </div>
+                        <div class="stat stat-mobile-only">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-text">Customer Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-image-wrapper">
+                        <img src="Logo-no-background.png" alt="M.J. Debney Plumbing & Gas" class="hero-logo-img">
+                        <div class="hero-shape hero-shape-1"></div>
+                        <div class="hero-shape hero-shape-2"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Section -->
+        <section class="services section" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Services</h2>
+                    <p class="section-subtitle">Comprehensive plumbing and gas solutions</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3 class="service-title">General Plumbing</h3>
+                        <p class="service-description">
+                            From leaky taps to complete installations, we handle all your plumbing needs with expertise.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> Tap repairs & replacements</li>
+                            <li><i class="fas fa-check"></i> Pipe installations</li>
+                            <li><i class="fas fa-check"></i> Leak detection & repair</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3 class="service-title">Gas Fitting</h3>
+                        <p class="service-description">
+                            Licensed gas fitting services for safe and efficient gas appliance installation and maintenance.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> Gas appliance installation</li>
+                            <li><i class="fas fa-check"></i> Gas leak detection</li>
+                            <li><i class="fas fa-check"></i> Safety inspections</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3 class="service-title">Hot Water Systems</h3>
+                        <p class="service-description">
+                            Expert installation, repair, and maintenance of all hot water system types.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> System installation</li>
+                            <li><i class="fas fa-check"></i> Repairs & servicing</li>
+                            <li><i class="fas fa-check"></i> Energy-efficient upgrades</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-toilet"></i>
+                        </div>
+                        <h3 class="service-title">Bathroom Renovations</h3>
+                        <p class="service-description">
+                            Complete bathroom renovation services from planning to perfect completion.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> Full renovations</li>
+                            <li><i class="fas fa-check"></i> Fixture upgrades</li>
+                            <li><i class="fas fa-check"></i> Waterproofing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3 class="service-title">Drainage Solutions</h3>
+                        <p class="service-description">
+                            Professional drainage services to keep your property flowing smoothly.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> Blocked drain clearing</li>
+                            <li><i class="fas fa-check"></i> CCTV inspections</li>
+                            <li><i class="fas fa-check"></i> Drainage repairs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="service-title">Emergency Service</h3>
+                        <p class="service-description">
+                            24/7 emergency plumbing and gas services when you need us most.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check"></i> Burst pipes</li>
+                            <li><i class="fas fa-check"></i> Gas leaks</li>
+                            <li><i class="fas fa-check"></i> Urgent repairs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section class="about section" id="about">
+            <div class="container">
+                <div class="about-container">
+                    <div class="about-content">
+                        <div class="section-header">
+                            <h2 class="section-title">Why Choose M.J. Debney?</h2>
+                            <p class="section-subtitle">Your trusted local plumbing and gas experts</p>
+                        </div>
+                        
+                        <p class="about-text">
+                            With over 15 years of experience in the plumbing and gas industry, M.J. Debney Plumbing & Gas has built a reputation for excellence, reliability, and honest service. We pride ourselves on delivering top-quality workmanship at competitive prices.
+                        </p>
+                        
+                        <div class="about-features">
+                            <div class="about-feature">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <h4>Fully Licensed & Insured</h4>
+                                    <p>Complete peace of mind with every job</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-medal"></i>
+                                <div>
+                                    <h4>Quality Guaranteed</h4>
+                                    <p>We stand behind all our work</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-dollar-sign"></i>
+                                <div>
+                                    <h4>Transparent Pricing</h4>
+                                    <p>No hidden fees or surprises</p>
+                                </div>
+                            </div>
+                            <div class="about-feature">
+                                <i class="fas fa-user-friends"></i>
+                                <div>
+                                    <h4>Local & Reliable</h4>
+                                    <p>Serving our community with pride</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-comments"></i>
+                            Let's Discuss Your Project
+                        </a>
+                    </div>
+                    
+                    <div class="about-image">
+                        <div class="about-image-wrapper">
+                            <img src="images-of-work/IMG_6020.jpg" alt="Professional plumbing work" class="about-img">
+                            <div class="about-experience">
+                                <span class="experience-number">15+</span>
+                                <span class="experience-text">Years of Excellence</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Work Gallery Section -->
+        <section class="work section" id="work">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Recent Work</h2>
+                    <p class="section-subtitle">Quality craftsmanship in every project</p>
+                </div>
+                
+                <div class="gallery-wrapper">
+                    <div class="gallery-container">
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_6021.png" alt="Plumbing installation">
+                            <div class="gallery-overlay">
+                                <h4>Modern Installation</h4>
+                                <p>Complete bathroom fitting</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_6020.jpg" alt="Gas fitting work">
+                            <div class="gallery-overlay">
+                                <h4>Gas System</h4>
+                                <p>Safe gas appliance installation</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_6019.jpg" alt="Plumbing repair">
+                            <div class="gallery-overlay">
+                                <h4>Expert Repairs</h4>
+                                <p>Quick and efficient solutions</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_5978.jpg" alt="Hot water system">
+                            <div class="gallery-overlay">
+                                <h4>Hot Water System</h4>
+                                <p>Energy-efficient installation</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_5293.jpg" alt="Drainage work">
+                            <div class="gallery-overlay">
+                                <h4>Drainage Solutions</h4>
+                                <p>Professional drainage services</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_5240.jpg" alt="Bathroom renovation">
+                            <div class="gallery-overlay">
+                                <h4>Bathroom Renovation</h4>
+                                <p>Complete transformation</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_5028.jpg" alt="Pipe installation">
+                            <div class="gallery-overlay">
+                                <h4>Pipe Installation</h4>
+                                <p>Quality materials and workmanship</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images-of-work/IMG_4990.jpg" alt="Commercial plumbing">
+                            <div class="gallery-overlay">
+                                <h4>Commercial Project</h4>
+                                <p>Large-scale plumbing solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-controls">
+                    <div class="scroll-indicator">
+                        <i class="fas fa-hand-pointer"></i>
+                        <span>Swipe to see more work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="testimonials section" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">What Our Clients Say</h2>
+                    <p class="section-subtitle">Real experiences from satisfied customers</p>
+                </div>
+                
+                <div class="testimonials-container">
+                    <div class="testimonials-slider">
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "M.J. Debney provided exceptional service when our hot water system failed. They arrived promptly, diagnosed the issue quickly, and had everything fixed the same day. Professional and reliable!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Sarah Johnson</h4>
+                                    <p>Homeowner, Parramatta</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "We've used M.J. Debney for our bathroom renovation and couldn't be happier. They were professional, kept to the timeline, and the quality of work exceeded our expectations. Highly recommend!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Michael Chen</h4>
+                                    <p>Business Owner, Ryde</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "Emergency plumbing at its finest! Burst pipe at 10pm and M.J. Debney was here within 30 minutes. Fixed the problem efficiently and cleaned up afterwards. Can't thank them enough!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Emma Williams</h4>
+                                    <p>Property Manager, Chatswood</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "As a property developer, I need reliable tradespeople. M.J. Debney has been our go-to for plumbing and gas fitting for 5 years. Always professional, fairly priced, and quality work every time."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>David Thompson</h4>
+                                    <p>Property Developer, North Shore</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">
+                                "M.J. Debney installed our new gas cooktop and hot water system. The attention to detail and safety was impressive. They explained everything clearly and left the area spotless. Excellent service!"
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Lisa Patel</h4>
+                                    <p>Homeowner, Castle Hill</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonials-controls">
+                        <div class="scroll-indicator">
+                            <i class="fas fa-hand-pointer"></i>
+                            <span>Swipe to read more reviews</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="section-subtitle">Ready to discuss your plumbing or gas needs?</p>
+                </div>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3 class="contact-title">Let's Work Together</h3>
+                        <p class="contact-text">
+                            Whether you need emergency repairs, planning a renovation, or require regular maintenance, we're here to help. Contact us today for a free quote.
+                        </p>
+                        
+                        <div class="contact-items">
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <a href="tel:+61428783038">0428 783 038</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <a href="mailto:info@mjdebney.com.au">info@mjdebney.com.au</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Service Area</h4>
+                                    <p>Greater Brisbane Area</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h4>Hours</h4>
+                                    <p>Mon-Fri: 7am-5:30pm<br>Sat-Sun: 7am-3:30pm</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-cta">
+                            <h4>Need Emergency Service?</h4>
+                            <p>We're available for urgent plumbing and gas issues</p>
+                            <a href="tel:+61428783038" class="btn btn-emergency">
+                                <i class="fas fa-phone-alt"></i>
+                                Call Now - 0428 783 038
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <input type="text" class="form-input" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-input" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" class="form-input" placeholder="Your Phone" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-input form-textarea" placeholder="Your Message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="Logo-no-background.png" alt="M.J. Debney Plumbing & Gas" class="footer-logo">
+                    <p class="footer-description">
+                        Your trusted partner for all plumbing and gas needs. Quality service, guaranteed satisfaction.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/profile.php?id=61567940694591" class="social-link" aria-label="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/m.j.debney/?api=1%2F&hl=zh-cn" class="social-link" aria-label="Instagram" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#work">Our Work</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#services">General Plumbing</a></li>
+                        <li><a href="#services">Gas Fitting</a></li>
+                        <li><a href="#services">Hot Water Systems</a></li>
+                        <li><a href="#services">Bathroom Renovations</a></li>
+                        <li><a href="#services">Emergency Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <a href="tel:+61428783038">0428 783 038</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@mjdebney.com.au">info@mjdebney.com.au</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            Mon-Fri: 7am-5:30pm, Weekends: 7am-3:30pm
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 M.J. Debney Plumbing & Gas. All rights reserved.</p>
+                <p>Licensed Plumber & Gas Fitter | ABN: 61 679 330 057</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scroll to top button -->
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 
