@@ -1332,17 +1332,23 @@ img {
         border-left: 4px solid var(--primary-blue);
     }
     
+    /* Icon container for mobile */
+    .about-feature {
+        position: relative;
+    }
+    
     .about-feature i {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        color: var(--primary-blue);
         flex-shrink: 0;
-        margin-top: 3px;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         background: rgba(0, 102, 204, 0.1);
-        border-radius: 10px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: 0;
     }
     
     .about-feature h4 {
