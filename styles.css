@@ -1332,15 +1332,14 @@ img {
         border-left: 4px solid var(--primary-blue);
     }
     
-    /* Icon container for mobile */
+    /* Keep icons simple on mobile - just like desktop but with container */
     .about-feature {
         position: relative;
     }
     
     .about-feature i {
-        font-size: 1.8rem;
+        font-size: 2rem;
         color: var(--primary-blue);
-        flex-shrink: 0;
         width: 50px;
         height: 50px;
         background: rgba(0, 102, 204, 0.1);
@@ -1349,6 +1348,11 @@ img {
         align-items: center;
         justify-content: center;
         margin-right: 0;
+        flex-shrink: 0;
+        /* Reset webkit properties that make icons invisible */
+        -webkit-text-fill-color: initial;
+        -webkit-background-clip: initial;
+        background-clip: initial;
     }
     
     .about-feature h4 {
