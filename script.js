@@ -47,25 +47,43 @@ const sections = document.querySelectorAll('section[id]');
 
 function scrollActive() {
     const scrollY = window.pageYOffset;
+    const headerHeight = 80; // Account for fixed header
 
     // Remove active from all links first
     document.querySelectorAll('.nav-link').forEach(navLink => {
         navLink.classList.remove('active');
     });
 
-    sections.forEach(current => {
-        const sectionHeight = current.offsetHeight;
-        const sectionTop = current.offsetTop - 120;
-        const sectionId = current.getAttribute('id');
-        const link = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            link?.classList.add('active');
+    // Check which section is currently in view
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - headerHeight - 50;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            currentSection = sectionId;
         }
     });
+
+    // If we're at the very top, highlight Home
+    if (scrollY < 100) {
+        currentSection = 'home';
+    }
+
+    // Add active class to the current section's nav link
+    if (currentSection) {
+        const activeLink = document.querySelector(`.nav-menu a[href="#${currentSection}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
 }
 
+// Initialize on page load and add scroll listener
 window.addEventListener('scroll', scrollActive);
+window.addEventListener('load', scrollActive);
 
 // =============== HEADER SHADOW ON SCROLL ===============
 const header = document.getElementById('header');
