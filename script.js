@@ -343,26 +343,50 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
             const target = entry.target;
-            const value = target.textContent;
-            const number = parseInt(value);
-            const increment = number / 50;
-            let current = 0;
+            const originalContent = target.innerHTML;
             
-            const updateCounter = () => {
-                if (current < number) {
-                    current += increment;
-                    target.textContent = Math.ceil(current) + (value.includes('+') ? '+' : '');
-                    setTimeout(updateCounter, 30);
-                } else {
-                    target.textContent = value;
-                }
-            };
+            // Handle different types of stats
+            if (originalContent.includes('fa-certificate')) {
+                // Licensed certificate - just add counted class (no animation needed)
+                target.classList.add('counted');
+                return;
+            }
             
-            updateCounter();
+            // Extract number for counting animation
+            const textValue = target.textContent;
+            const number = parseInt(textValue);
+            
+            if (!isNaN(number) && number > 0) {
+                const hasPlus = textValue.includes('+');
+                const hasPercent = textValue.includes('%');
+                const increment = number / 60; // Slower animation
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < number) {
+                        current += increment;
+                        let displayValue = Math.ceil(current);
+                        
+                        // Add appropriate suffix
+                        if (hasPlus) displayValue += '+';
+                        if (hasPercent) displayValue += '%';
+                        
+                        target.textContent = displayValue;
+                        setTimeout(updateCounter, 25);
+                    } else {
+                        // Ensure final value is correct
+                        target.textContent = textValue;
+                    }
+                };
+                
+                // Start animation after a small delay
+                setTimeout(updateCounter, 200);
+            }
+            
             target.classList.add('counted');
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.3 }); // Lower threshold for earlier trigger
 
 stats.forEach(stat => statsObserver.observe(stat));
 
