@@ -40,7 +40,7 @@ The contact form is powered by Netlify Forms and includes:
 - Service selection dropdown
 - Real-time validation
 - Success/error feedback
-- Email notifications to info@mjdebney.com.au
+- Email notifications to michael@mjdebneypg.com
 
 ## 🎨 Brand Colors
 
@@ -80,7 +80,7 @@ The `netlify.toml` file handles all configuration automatically.
 ## 📞 Contact Information
 
 - **Phone**: 0428 783 038
-- **Email**: info@mjdebney.com.au
+- **Email**: michael@mjdebneypg.com
 - **Service Area**: Greater Brisbane Area
 - **Hours**: Mon-Fri 7am-5:30pm, Weekends 7am-3:30pm
 

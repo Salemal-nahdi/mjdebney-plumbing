@@ -34,7 +34,7 @@
 
 # Form submission settings
 [forms]
-  settings = { recipients = ["info@mjdebney.com.au"] }
+  settings = { recipients = ["michael@mjdebneypg.com"] }
 
 # Redirect rules
 [[redirects]]
