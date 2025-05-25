@@ -1548,6 +1548,9 @@ img {
         text-align: left;
         margin: 0 5px;
         scroll-snap-align: center;
+        display: flex;
+        flex-direction: column;
+        min-height: 280px;
     }
     
     /* Add testimonials scroll indicator */
@@ -1573,11 +1576,13 @@ img {
         text-align: left;
         font-style: italic;
         margin-bottom: 20px;
+        flex-grow: 1;
     }
     
     .testimonial-author {
         justify-content: flex-start;
         text-align: left;
+        margin-top: auto;
     }
     
     .author-info {
@@ -1768,6 +1773,9 @@ img {
         flex: 0 0 calc(100vw - 50px);
         padding: 25px 20px;
         margin: 0 2px;
+        display: flex;
+        flex-direction: column;
+        min-height: 260px;
     }
     
     /* Better spacing for controls on small screens */
@@ -1858,6 +1866,9 @@ img {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     scroll-snap-align: start;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
 }
 
 .testimonial-card:hover {
@@ -1877,6 +1888,7 @@ img {
     color: #666;
     margin-bottom: 30px;
     font-style: italic;
+    flex-grow: 1;
 }
 
 .testimonial-author {
@@ -1885,6 +1897,7 @@ img {
     justify-content: center; /* Center without image */
     gap: 15px;
     text-align: center;
+    margin-top: auto;
 }
 
 .author-image {
