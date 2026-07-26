@@ -348,10 +348,11 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         // Reinitialize gallery controls for mobile/desktop switch
+        if (!gallery) return;
         if (window.innerWidth <= 768) {
-            gallery?.style.cursor = 'grab';
+            gallery.style.cursor = 'grab';
         } else {
-            gallery?.style.cursor = 'default';
+            gallery.style.cursor = 'default';
         }
     }, 250);
 });
