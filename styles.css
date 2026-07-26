@@ -789,6 +789,16 @@ img {
     resize: vertical;
 }
 
+.form-recaptcha {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.form-recaptcha > div {
+    transform-origin: left center;
+}
+
 .form-textarea ~ i {
     display: none;
 }

@@ -36,7 +36,7 @@ Visit the live website: [M.J. Debney Plumbing & Gas](https://mjdebney.netlify.ap
 ## 📧 Contact Form
 
 The contact form is powered by Netlify Forms and includes:
-- Spam protection with honeypot
+- Spam protection with honeypot and Netlify reCAPTCHA 2
 - Service selection dropdown
 - Real-time validation
 - Success/error feedback

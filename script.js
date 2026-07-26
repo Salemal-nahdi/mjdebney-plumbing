@@ -224,17 +224,27 @@ const contactForm = document.getElementById('contact-form');
 contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Add loading state
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
+    const captchaResponse = contactForm.querySelector('[name="g-recaptcha-response"]')?.value;
+
+    // Require completed reCAPTCHA before submitting
+    if (!captchaResponse) {
+        submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Complete Captcha';
+        submitBtn.style.background = '#dc3545';
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.background = '';
+        }, 3000);
+        return;
+    }
+
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     
     try {
-        // Prepare form data for Netlify
         const formData = new FormData(contactForm);
         
-        // Submit to Netlify
         const response = await fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -242,12 +252,13 @@ contactForm?.addEventListener('submit', async (e) => {
         });
         
         if (response.ok) {
-            // Success - reset form and show success message
             contactForm.reset();
+            if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+            }
             submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
             submitBtn.style.background = 'var(--gradient-orange)';
             
-            // Reset button after 3 seconds
             setTimeout(() => {
                 submitBtn.innerHTML = originalText;
                 submitBtn.style.background = '';
@@ -259,11 +270,12 @@ contactForm?.addEventListener('submit', async (e) => {
     } catch (error) {
         console.error('Form submission error:', error);
         
-        // Show error message
+        if (typeof grecaptcha !== 'undefined') {
+            grecaptcha.reset();
+        }
         submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
         submitBtn.style.background = '#dc3545';
         
-        // Reset button after 3 seconds
         setTimeout(() => {
             submitBtn.innerHTML = originalText;
             submitBtn.style.background = '';
