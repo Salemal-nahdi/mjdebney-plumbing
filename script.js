@@ -223,10 +223,29 @@ const contactForm = document.getElementById('contact-form');
 const captchaError = document.getElementById('captcha-error');
 
 function getCaptchaResponse() {
-    if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.getResponse === 'function') {
-        return grecaptcha.getResponse();
+    // Prefer the hidden field Netlify/Google writes into
+    const fieldValue = contactForm?.querySelector('textarea[name="g-recaptcha-response"], input[name="g-recaptcha-response"]')?.value?.trim();
+    if (fieldValue) return fieldValue;
+
+    if (typeof grecaptcha === 'undefined' || typeof grecaptcha.getResponse !== 'function') {
+        return '';
     }
-    return contactForm?.querySelector('[name="g-recaptcha-response"]')?.value || '';
+
+    try {
+        const response = grecaptcha.getResponse();
+        if (response) return response;
+
+        // Fallback: check each rendered widget
+        const widgets = document.querySelectorAll('.g-recaptcha');
+        for (let i = 0; i < widgets.length; i++) {
+            const widgetResponse = grecaptcha.getResponse(i);
+            if (widgetResponse) return widgetResponse;
+        }
+    } catch (err) {
+        console.warn('Could not read reCAPTCHA response:', err);
+    }
+
+    return '';
 }
 
 function showCaptchaError() {
@@ -239,14 +258,24 @@ function hideCaptchaError() {
     if (captchaError) captchaError.hidden = true;
 }
 
+function resetCaptcha() {
+    if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.reset === 'function') {
+        try {
+            grecaptcha.reset();
+        } catch (err) {
+            console.warn('Could not reset reCAPTCHA:', err);
+        }
+    }
+}
+
 contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    
+
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
+    const captchaResponse = getCaptchaResponse();
 
-    if (!getCaptchaResponse()) {
+    if (!captchaResponse) {
         showCaptchaError();
         return;
     }
@@ -254,42 +283,38 @@ contactForm?.addEventListener('submit', async (e) => {
     hideCaptchaError();
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
-    
+
     try {
         const formData = new FormData(contactForm);
-        
+        formData.set('g-recaptcha-response', captchaResponse);
+
         const response = await fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(formData).toString()
         });
-        
-        if (response.ok) {
-            contactForm.reset();
-            if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.reset();
-            }
-            hideCaptchaError();
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-            submitBtn.style.background = 'var(--gradient-orange)';
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = '';
-                submitBtn.disabled = false;
-            }, 3000);
-        } else {
+
+        if (!response.ok) {
             throw new Error('Form submission failed');
         }
+
+        contactForm.reset();
+        resetCaptcha();
+        hideCaptchaError();
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        submitBtn.style.background = 'var(--gradient-orange)';
+
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.background = '';
+            submitBtn.disabled = false;
+        }, 3000);
     } catch (error) {
         console.error('Form submission error:', error);
-        
-        if (typeof grecaptcha !== 'undefined') {
-            grecaptcha.reset();
-        }
+        resetCaptcha();
         submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
         submitBtn.style.background = '#dc3545';
-        
+
         setTimeout(() => {
             submitBtn.innerHTML = originalText;
             submitBtn.style.background = '';
