@@ -220,25 +220,38 @@ document.querySelectorAll('.gallery-item').forEach((el, index) => {
 
 // =============== NETLIFY FORM SUBMISSION ===============
 const contactForm = document.getElementById('contact-form');
+const captchaError = document.getElementById('captcha-error');
+
+function getCaptchaResponse() {
+    if (typeof grecaptcha !== 'undefined' && typeof grecaptcha.getResponse === 'function') {
+        return grecaptcha.getResponse();
+    }
+    return contactForm?.querySelector('[name="g-recaptcha-response"]')?.value || '';
+}
+
+function showCaptchaError() {
+    if (!captchaError) return;
+    captchaError.hidden = false;
+    captchaError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function hideCaptchaError() {
+    if (captchaError) captchaError.hidden = true;
+}
 
 contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
-    const captchaResponse = contactForm.querySelector('[name="g-recaptcha-response"]')?.value;
 
-    // Require completed reCAPTCHA before submitting
-    if (!captchaResponse) {
-        submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Complete Captcha';
-        submitBtn.style.background = '#dc3545';
-        setTimeout(() => {
-            submitBtn.innerHTML = originalText;
-            submitBtn.style.background = '';
-        }, 3000);
+    if (!getCaptchaResponse()) {
+        showCaptchaError();
         return;
     }
 
+    hideCaptchaError();
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     
@@ -256,6 +269,7 @@ contactForm?.addEventListener('submit', async (e) => {
             if (typeof grecaptcha !== 'undefined') {
                 grecaptcha.reset();
             }
+            hideCaptchaError();
             submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
             submitBtn.style.background = 'var(--gradient-orange)';
             

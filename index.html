@@ -524,7 +524,7 @@
                     </div>
                     
                     <div class="contact-form">
-                        <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+                        <form id="contact-form" name="contact" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true" onsubmit="return false;">
                             <!-- Hidden field for bot detection -->
                             <input type="hidden" name="form-name" value="contact" />
                             <div style="display: none;">
@@ -557,6 +557,9 @@
                                 <textarea name="message" class="form-input form-textarea" placeholder="Your Message" rows="5" required></textarea>
                             </div>
                             <div class="form-group form-recaptcha" data-netlify-recaptcha="true"></div>
+                            <p id="captcha-error" class="form-captcha-error" hidden role="alert">
+                                Please tick the captcha checkbox before sending.
+                            </p>
                             <button type="submit" class="btn btn-primary btn-block">
                                 <i class="fas fa-paper-plane"></i>
                                 Send Message
